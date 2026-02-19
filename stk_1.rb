@@ -24,7 +24,9 @@ class StkApiClient
   end
 
   ### TODOS ###
-  def get_todos_by_user_id(user_id) # user_id is an integer
+  def get_todos_by_user_id(user_id)
+    raise ArgumentError, "user_id must be an Integer" unless user_id.is_a?(Integer)
+
     response = get_response('/todos', {userId: user_id})
 
     result = format_result(response)
@@ -32,7 +34,9 @@ class StkApiClient
     result
   end
 
-  def get_todos_by_title(title) # title is a string
+  def get_todos_by_title(title)
+    raise ArgumentError, "title must be a String" unless title.is_a?(String)
+
     response = get_response('/todos')
 
     unless response.success?
@@ -50,11 +54,7 @@ class StkApiClient
   end
 
   def get_todos_by_status(bool)
-    unless [true, false].include?(bool)
-      error_obj = { success: false, status: 400, error: 'unknown status' }
-      pp error_obj
-      return error_obj
-    end
+    raise ArgumentError, "completed status must be true or false" unless [true, false].include?(bool)
 
     response = get_response('/todos', {completed: bool})
 
@@ -64,7 +64,9 @@ class StkApiClient
   end
 
   ### POSTS ###
-  def get_posts_by_user_id(user_id) # user_id is an Integer
+  def get_posts_by_user_id(user_id)
+    raise ArgumentError, "user_id must be an Integer" unless user_id.is_a?(Integer)
+
     response = get_response('/posts', {userId: user_id})
 
     result = format_result(response)
@@ -72,7 +74,9 @@ class StkApiClient
     result
   end
 
-  def get_post_by_post_id(post_id) # post_id is an Integer
+  def get_post_by_post_id(post_id)
+    raise ArgumentError, "post_id must be an Integer" unless post_id.is_a?(Integer)
+
     response = get_response("/posts/#{post_id}")
 
     result = format_result(response)
@@ -80,7 +84,9 @@ class StkApiClient
     result
   end
 
-  def get_posts_by_body(body) # body is a String
+  def get_posts_by_body(body)
+    raise ArgumentError, "body must be a String" unless body.is_a?(String)
+
     response = get_response('/posts')
 
     unless response.success?
@@ -98,6 +104,8 @@ class StkApiClient
   end
 
   def get_users_by_city(city)
+    raise ArgumentError, "city must be a String" unless city.is_a?(String)
+
     response = get_response('/users')
 
     unless response.success?
