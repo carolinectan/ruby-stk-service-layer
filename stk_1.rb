@@ -141,10 +141,8 @@ stk = StkApiClient.new
 
 # TODOS
   # stk.get_todos_by_user_id(9)
-
   # stk.get_todos_by_title("fugiat veniam minus") # full title
   # stk.get_todos_by_title("fugiat veniam") # partial title
-
   # stk.get_todos_by_status(true)
   # stk.get_todos_by_status(false)
   # stk.get_todos_by_status(nil)
