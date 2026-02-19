@@ -7,7 +7,12 @@ require 'json'
 class StkApiClient
   BASE_URL = "https://jsonplaceholder.typicode.com"
 
-  def get_response(endpoint, params = {}) # endpoint is a String with leading "/"
+  def get_response(endpoint, params = {})
+    unless endpoint.is_a?(String) && endpoint.start_with?("/")
+      raise ArgumentError, "endpoint must be a String and start with a /"
+    end
+    raise ArgumentError, "params must be a Hash" unless params.is_a?(Hash)
+
     HTTParty.get("#{BASE_URL}#{endpoint}", query: params)
   end
 
